@@ -1,0 +1,27 @@
+const isPrime = (a) => {
+    let prime = a.filter((val) => {
+        if (val < 2) return false;
+        for (let i = 2; i <= (val / 2); i++) {
+            if (val % i === 0)
+                return false;
+        }
+        return true;
+    })
+    return prime;
+}
+const longestString = (s) => {
+    let str = s.reduce((acc, val) => { return acc + val }, "")
+    return str;
+}
+const getDate = () => {
+    let date = new Date();
+    return `${date.getDate().toString()} ${date.toLocaleString('default', { month: 'long' })} ${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+
+}
+module.exports = { isPrime, longestString, getDate }
+
+
+let cal = require('./functionality');
+console.log(cal.isPrime([2, 3, 4, 5, 6]))
+console.log(cal.longestString(['welcome', 'to', 'node']))
+console.log(cal.getDate())
