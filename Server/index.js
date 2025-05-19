@@ -57,6 +57,24 @@ app.post('/cust', (req, res) => {
         res.send({ "msg": "data inserted" })
     })
 })
+app.put('/cust/:id', (req, res) => {
+    let id = parseInt(req.params.id);
+    let newName = req.body.name;
+    let newLoc = req.body.loc;
+    console.log(id + " " + newName + " " + newLoc);
+    let query = 'update customer set cname=?, loc=? where custid=?';
+    con.query(query, [newName, newLoc, id], (err, data) => {
+        if (!err) {
+            if (data.affectedRows >= 1)
+                res.send({ 'msg': 'Data updated!!' });
+            else
+                res.send({ 'msg': 'No data updated.' });
+        } else {
+            res.status(500).send({ 'msg': 'Error updating data.' });
+            console.log(err);
+        }
+    })
+})
 app.delete('/cust/:val', (req, res) => {
     let val = req.params.val;
     console.log(val);
